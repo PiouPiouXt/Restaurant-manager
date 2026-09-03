@@ -1,0 +1,22 @@
+:root {
+  --paper: #f6f2e9;
+  --ink: #20231f;
+  --muted: #797a70;
+  --line: #d9d4c8;
+  --coral: #d6533d;
+  --sage: #dbe1d2;
+  --sans: "Trebuchet MS", "Segoe UI", sans-serif;
+  --heading: Georgia, "Times New Roman", serif;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; background: var(--paper); }
+button, a { transition: color .2s ease, opacity .2s ease, transform .2s ease; }
+a:hover { opacity: .65; }
