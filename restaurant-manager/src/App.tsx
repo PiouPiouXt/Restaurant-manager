@@ -2,7 +2,7 @@ import { RestaurantCard } from './components/RestaurantCard'
 import { restaurants } from './data/restaurant'
 import './App.css'
 
-function App() {
+export function App() {
   return (
     <main className="app-shell">
       <header className="site-header">
@@ -34,8 +34,15 @@ function App() {
           <h1>Les bonnes adresses commencent ici.</h1>
           <p className="hero-intro">Une sélection de restaurants singuliers, choisis pour les envies du jour.
           </p>
-          <a className="hero-link" href="#restaurants">Explorer la sélection <span aria-hidden="true">↘</span></a></div>
-        <div className="hero-note" aria-label="Sélection de la semaine"><span className="note-number">03</span><span className="note-label">adresses à découvrir<br />cette semaine</span></div>
+          <a className="hero-link" href="#restaurants">Explorer la sélection
+            <span aria-hidden="true">↘</span>
+          </a>
+        </div>
+        <div className="hero-note" aria-label="Sélection de la semaine">
+          <span className="note-number">03</span>
+          <span className="note-label">adresses à découvrir
+            <br />cette semaine</span>
+        </div>
       </section>
 
       <section className="restaurant-section" id="restaurants">
@@ -47,7 +54,9 @@ function App() {
           <p className="section-count">01 — 03</p>
         </div>
         <div className="restaurant-grid">
-          {restaurants.map((restaurant) => <RestaurantCard key={restaurant.id} restaurant={restaurant} />)}
+          {restaurants.map((restaurant) =>
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} />)
+          }
         </div>
       </section>
       <footer className="site-footer">
@@ -58,4 +67,3 @@ function App() {
   )
 }
 
-export default App
