@@ -3,11 +3,14 @@ import "./RestaurantCard.css";
 
 type RestaurantCardProps = {
   restaurant: Restaurant;
+  onSelect: (restaurant: Restaurant) => void;
 };
 
-export function RestaurantCard({ restaurant }: RestaurantCardProps) {
+export function RestaurantCard({ restaurant, onSelect }: RestaurantCardProps) {
   return (
-    <article className="restaurant-card">
+    <div 
+      className="restaurant-card"
+      onClick={() => onSelect(restaurant)}>
       <div className="restaurant-image-wrap">
         <img className="restaurant-image" src={restaurant.image} alt={restaurant.name} />
         <span className={`status-badge ${restaurant.isOpen ? "status-open" : "status-closed"}`}>
@@ -30,6 +33,6 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           <span>{"€".repeat(restaurant.priceRange)}</span>
         </div>
       </div>
-    </article>
+    </div>
   )
 }
