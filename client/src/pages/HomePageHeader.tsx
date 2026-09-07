@@ -5,8 +5,8 @@ export function HomePageHeader() {
     <>
       <header className="site-header">
         <a className="brand" href="/" aria-label="Table locale home">
-          <span className="brand-mark">TL</span>
-          <span>Table locale</span>
+          <span className="brand-mark">PB</span>
+          <span>Piou Babasha</span>
         </a>
 
         <nav className="site-nav" aria-label="Navigation principale">

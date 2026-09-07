@@ -17,6 +17,14 @@ export function App() {
     setSelectedRestaurant(restaurant);
   }
 
+  function HandleOpenChange(onlyOpen: boolean): void {
+    setOnlyOpen(onlyOpen);
+  }
+
+  function HandleCuisineChange(cuisine: string): void {
+    setSelectedCuisine(cuisine);
+  }
+
   return (
     <main className="app-shell">
       <HomePageHeader />
@@ -35,8 +43,10 @@ export function App() {
         searchTerm={searchTerm}
         selectedCuisine={selectedCuisine}
         onlyOpen={onlyOpen}
-        changeSearch={setSearchTerm}
-        selectedRestaurant={selectedRestaurant}
+        ChangeSearch={setSearchTerm}
+        HandleCuisineChange={HandleCuisineChange}
+        onSelect={HandleSelectedRestaurant}
+        HandleOpenChange={HandleOpenChange}
       />
       <Footer />
     </main>

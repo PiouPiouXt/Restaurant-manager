@@ -1,0 +1,31 @@
+.restaurant-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0.5rem 0 0.5rem;
+  flex-direction: column;
+}
+
+.filter-btn {
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-btn:hover {
+  border-color: var(--coral);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--coral), var(--lime));
+  border-color: var(--coral);
+  color: #ffffff;
+  box-shadow: 0 8px 18px var(--coral);
+}
