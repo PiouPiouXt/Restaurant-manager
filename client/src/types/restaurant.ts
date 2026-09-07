@@ -8,3 +8,5 @@ export type Restaurant = {
   isOpen: boolean;
   image: string  
 }
+
+export type Cuisine = "Tous"|"Italienne"|"Japonaise"|"Burger";
