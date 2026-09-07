@@ -1,0 +1,118 @@
+.restaurant-card {
+  overflow: hidden;
+  background: var(--sage);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(32, 35, 31, .11);
+}
+
+.restaurant-image-wrap {
+  position: relative;
+  aspect-ratio: 1.18 / 1;
+  overflow: hidden;
+}
+
+.restaurant-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(.82);
+  transition: transform .5s ease;
+}
+
+.restaurant-card:hover .restaurant-image {
+  transform: scale(1.04);
+}
+
+.status-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  color: var(--paper);
+  background: rgba(32, 35, 31, .82);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.status-closed {
+  background: rgba(32, 35, 31, .72);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #8fca69;
+}
+
+.status-closed .status-dot {
+  background: #d6a39c;
+}
+
+.card-index {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  color: var(--paper);
+  font-family: var(--heading);
+  font-size: 18px;
+}
+
+.restaurant-content {
+  padding: 21px 20px 19px;
+}
+
+.restaurant-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.restaurant-cuisine {
+  margin: 0 0 5px;
+  color: var(--coral);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.restaurant-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.card-arrow {
+  color: var(--coral);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.restaurant-meta {
+  display: flex;
+  gap: 17px;
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.restaurant-meta strong {
+  color: var(--coral);
+  font-size: 14px;
+}
