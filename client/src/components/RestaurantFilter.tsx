@@ -7,8 +7,8 @@ type RestaurantFilterProps = {
   onSelect: (restaurant: Restaurant) => void;
   searchTerm: string;
   ChangeSearch: (searchTerm: string) => void;
-  selectedCuisine: string | null;
-  HandleCuisineChange: (cuisine: string) => void;
+  selectedCuisine: Cuisine | null;
+  HandleCuisineChange: (cuisine: Cuisine) => void;
   onlyOpen: boolean;
   title: string;
   HandleOpenChange: (onlyOpen: boolean) => void;
@@ -37,6 +37,7 @@ export function RestaurantFilter(
   return (
     <div>
       <div className="restaurant-filter">
+        <h1>{title}</h1>
         <input type="text"
           value={searchTerm}
           onChange={(event) => ChangeSearch(event.target.value)}
@@ -45,7 +46,11 @@ export function RestaurantFilter(
         />
         <p>Cuisine:</p>
 
-        <select value={selectedCuisine ?? "Tous"} onChange={(event) => HandleCuisineChange(event.target.value)} className="filter-btn">
+        <select value={selectedCuisine ?? "Tous"} 
+        onChange={
+          (event) => HandleCuisineChange(event.target.value as Cuisine)
+        } 
+        className="filter-btn">
           <option value="Tous">Toutes</option>
           <option value="Italienne">Italienne</option>
           <option value="Burger">Burger</option>
@@ -56,11 +61,9 @@ export function RestaurantFilter(
             checked={onlyOpen} onChange={(event) => HandleOpenChange(event.target.checked)} />
           <label htmlFor="onlyOpen">Ouvert uniquement</label>
         </div>
-
       </div>
 
-      <h2>{title}</h2>
-      <RestaurantList restaurants={filteredRestaurant} onSelect={onSelect} />
+      <RestaurantList restaurants={filteredRestaurant} onSelect={onSelect} title={title} />
     </div>
   )
 }

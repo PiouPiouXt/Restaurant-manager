@@ -21,7 +21,7 @@ export function App() {
     setOnlyOpen(onlyOpen);
   }
 
-  function HandleCuisineChange(cuisine: string): void {
+  function HandleCuisineChange(cuisine: Cuisine): void {
     setSelectedCuisine(cuisine);
   }
 
@@ -39,6 +39,7 @@ export function App() {
         </div>
       }
       <RestaurantFilter
+        title="Restaurant filtrés"
         restaurants={restaurants}
         searchTerm={searchTerm}
         selectedCuisine={selectedCuisine}

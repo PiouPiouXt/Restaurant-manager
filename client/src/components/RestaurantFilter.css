@@ -1,31 +1,160 @@
 .restaurant-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: 0.5rem 0 0.5rem;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.5fr) minmax(150px, .7fr) auto;
+  align-items: end;
+  gap: 18px 22px;
+  margin: 42px 0 0;
+  padding: 24px 26px 26px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(219, 225, 210, .42);
 }
 
-.filter-btn {
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #374151;
-  padding: 0.7rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.95rem;
-  font-weight: 600;
+.restaurant-filter h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.restaurant-filter > p {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transform: translateY(-18px);
+}
+
+.restaurant-filter > input[type="text"],
+.restaurant-filter > select {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--paper);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.restaurant-filter > input[type="text"] {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 0 15px;
+}
+
+.restaurant-filter > select {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 0 34px 0 14px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 
-.filter-btn:hover {
-  border-color: var(--coral);
-  transform: translateY(-1px);
+.restaurant-filter > input[type="text"]::placeholder {
+  color: var(--muted);
+  opacity: 1;
 }
 
-.filter-btn.active {
-  background: linear-gradient(135deg, var(--coral), var(--lime));
+.restaurant-filter > input[type="text"]:focus,
+.restaurant-filter > select:focus {
   border-color: var(--coral);
-  color: #ffffff;
-  box-shadow: 0 8px 18px var(--coral);
+  box-shadow: 0 0 0 3px rgba(214, 83, 61, .12);
+  background: #fffdf8;
+}
+
+.restaurant-filter > div {
+  grid-column: 3;
+  grid-row: 2;
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.restaurant-filter input[type="checkbox"] {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  appearance: none;
+  background: var(--paper);
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.restaurant-filter input[type="checkbox"]::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--muted);
+  content: "";
+  transition: transform .2s ease, background .2s ease;
+}
+
+.restaurant-filter input[type="checkbox"]:checked {
+  border-color: var(--coral);
+  background: var(--coral);
+}
+
+.restaurant-filter input[type="checkbox"]:checked::after {
+  background: var(--paper);
+  transform: translateX(16px);
+}
+
+.restaurant-filter input[type="checkbox"]:focus-visible {
+  outline: 3px solid rgba(214, 83, 61, .2);
+  outline-offset: 2px;
+}
+
+.restaurant-filter label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 720px) {
+  .restaurant-filter {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 30px;
+    padding: 20px;
+  }
+
+  .restaurant-filter h1,
+  .restaurant-filter > input[type="text"],
+  .restaurant-filter > select,
+  .restaurant-filter > p,
+  .restaurant-filter > div {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .restaurant-filter > p {
+    margin: 4px 0 -8px;
+    transform: none;
+  }
+
+  .restaurant-filter > div {
+    min-height: 40px;
+  }
 }
