@@ -13,15 +13,15 @@ export function App() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
 
-  function HandleSelectedRestaurant(restaurant: Restaurant): void {
+  function handleSelectedRestaurant(restaurant: Restaurant): void {
     setSelectedRestaurant(restaurant);
   }
 
-  function HandleOpenChange(onlyOpen: boolean): void {
+  function handleOpenChange(onlyOpen: boolean): void {
     setOnlyOpen(onlyOpen);
   }
 
-  function HandleCuisineChange(cuisine: Cuisine): void {
+  function handleCuisineChange(cuisine: Cuisine): void {
     setSelectedCuisine(cuisine);
   }
 
@@ -31,7 +31,7 @@ export function App() {
       <RestaurantList
         restaurants={restaurants}
         title='Où manger ce soir ?'
-        onSelect={HandleSelectedRestaurant}
+        onSelect={handleSelectedRestaurant}
       />
       {selectedRestaurant &&
         <div className="selected-restaurant">
@@ -45,9 +45,9 @@ export function App() {
         selectedCuisine={selectedCuisine}
         onlyOpen={onlyOpen}
         ChangeSearch={setSearchTerm}
-        HandleCuisineChange={HandleCuisineChange}
-        onSelect={HandleSelectedRestaurant}
-        HandleOpenChange={HandleOpenChange}
+        handleCuisineChange={handleCuisineChange}
+        onSelect={handleSelectedRestaurant}
+        handleOpenChange={handleOpenChange}
       />
       <Footer />
     </main>

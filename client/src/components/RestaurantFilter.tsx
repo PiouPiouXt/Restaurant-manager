@@ -7,15 +7,15 @@ type RestaurantFilterProps = {
   onSelect: (restaurant: Restaurant) => void;
   searchTerm: string;
   ChangeSearch: (searchTerm: string) => void;
-  selectedCuisine: Cuisine | null;
-  HandleCuisineChange: (cuisine: Cuisine) => void;
+  selectedCuisine: Cuisine;
+  handleCuisineChange: (cuisine: Cuisine) => void;
   onlyOpen: boolean;
   title: string;
-  HandleOpenChange: (onlyOpen: boolean) => void;
+  handleOpenChange: (onlyOpen: boolean) => void;
 };
 
 export function RestaurantFilter(
-  { restaurants, searchTerm, selectedCuisine, onlyOpen, ChangeSearch, HandleCuisineChange, title, onSelect, HandleOpenChange }
+  { restaurants, searchTerm, selectedCuisine, onlyOpen, ChangeSearch, handleCuisineChange, title, onSelect, handleOpenChange }
     : RestaurantFilterProps) {
 
   const filteredRestaurant = restaurants.filter((restaurant) => {
@@ -25,7 +25,6 @@ export function RestaurantFilter(
 
     const matchesCuisine =
       selectedCuisine === "Tous" ||
-      selectedCuisine === null ||
       restaurant.cuisine === selectedCuisine;
 
     const matchesOpen =
@@ -46,19 +45,21 @@ export function RestaurantFilter(
         />
         <p>Cuisine:</p>
 
-        <select value={selectedCuisine ?? "Tous"} 
+        <select value={selectedCuisine} 
         onChange={
-          (event) => HandleCuisineChange(event.target.value as Cuisine)
+          //as Cuisine bcz we typed it cuisine instead of string
+          (event) => handleCuisineChange(event.target.value as Cuisine)
         } 
         className="filter-btn">
           <option value="Tous">Toutes</option>
+          <option value="Japonaise">Japonaise</option>
           <option value="Italienne">Italienne</option>
           <option value="Burger">Burger</option>
         </select>
 
         <div>
           <input type="checkbox" name="onlyOpen" id="onlyOpen" className="filter-btn"
-            checked={onlyOpen} onChange={(event) => HandleOpenChange(event.target.checked)} />
+            checked={onlyOpen} onChange={(event) => handleOpenChange(event.target.checked)} />
           <label htmlFor="onlyOpen">Ouvert uniquement</label>
         </div>
       </div>
