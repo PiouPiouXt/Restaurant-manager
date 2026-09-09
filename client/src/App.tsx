@@ -43,12 +43,6 @@ export function App() {
   return (
     <main className="app-shell">
       <HomePageHeader />
-      {/* <RestaurantList
-        restaurants={restaurants}
-        title='Où manger ce soir ?'
-        onSelect={handleSelectedRestaurant}
-      />
-       */}
       <RestaurantFilter
         title="Restaurant filtrés"
         searchTerm={searchTerm}
