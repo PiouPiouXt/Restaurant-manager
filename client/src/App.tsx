@@ -25,22 +25,32 @@ export function App() {
     setSelectedCuisine(cuisine);
   }
 
+  const filteredRestaurant = restaurants.filter((restaurant) => {
+    const matchesSearch = restaurant.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesCuisine =
+      selectedCuisine === "Tous" ||
+      restaurant.cuisine === selectedCuisine;
+
+    const matchesOpen =
+      !onlyOpen || restaurant.isOpen;
+
+    return matchesSearch && matchesCuisine && matchesOpen;
+  });
+
   return (
     <main className="app-shell">
       <HomePageHeader />
-      <RestaurantList
+      {/* <RestaurantList
         restaurants={restaurants}
         title='Où manger ce soir ?'
         onSelect={handleSelectedRestaurant}
       />
-      {selectedRestaurant &&
-        <div className="selected-restaurant">
-          <h2>Restaurant sélectionné: {selectedRestaurant.name}</h2>
-        </div>
-      }
+       */}
       <RestaurantFilter
         title="Restaurant filtrés"
-        restaurants={restaurants}
         searchTerm={searchTerm}
         selectedCuisine={selectedCuisine}
         onlyOpen={onlyOpen}
@@ -49,6 +59,12 @@ export function App() {
         onSelect={handleSelectedRestaurant}
         handleOpenChange={handleOpenChange}
       />
+      <RestaurantList restaurants={filteredRestaurant} onSelect={handleSelectedRestaurant} title="Où manger ce soir ?" />
+      {selectedRestaurant &&
+        <div className="selected-restaurant">
+          <h2>Restaurant sélectionné: {selectedRestaurant.name}</h2>
+        </div>
+      }
       <Footer />
     </main>
   )
