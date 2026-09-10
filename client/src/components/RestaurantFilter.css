@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .restaurant-filter {
   display: grid;
   grid-template-columns: minmax(220px, 1.5fr) minmax(150px, .7fr) auto;
