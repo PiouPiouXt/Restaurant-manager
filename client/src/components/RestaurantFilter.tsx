@@ -42,6 +42,7 @@ export function RestaurantFilter(
           <option value="Japonaise">Japonaise</option>
           <option value="Italienne">Italienne</option>
           <option value="Burger">Burger</option>
+          <option value="Thaïe">Thaïe</option>
         </select>
 
         {/* Open Only Filter */}
