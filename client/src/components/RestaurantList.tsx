@@ -1,7 +1,7 @@
 
 import type { Restaurant } from "../types/restaurant";
 import { RestaurantCard } from "./RestaurantCard";
-import "../App.css";
+import "../pages/HomePage.css";
 
 type RestaurantListProps = {
   restaurants: Restaurant[];

@@ -1,4 +1,4 @@
-import '../App.css';
+import './HomePage.css';
 
 export function HomePageHeader() {
   return (
