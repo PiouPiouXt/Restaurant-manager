@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
-import { HomePageHeader } from './HomePageHeader'
+import { Hero } from './Hero'
 import { Footer } from './Footer'
 import type { Cuisine, Restaurant } from '../types/restaurant'
+import { getSavedCuisine } from '../utils/getSavedCuisine'
 import './HomePage.css'
 import { RestaurantFilter } from '../components/RestaurantFilter'
 
@@ -24,27 +25,7 @@ export function HomePage() {
   //localStorage SelectedCuisine
   useEffect(() => {
     localStorage.setItem("cuisineSaved", selectedCuisine);
-  }, [selectedCuisine]);
-
-  function getSavedCuisine(): Cuisine {
-    const savedCuisine = localStorage.getItem("cuisineSaved");
-
-    if (savedCuisine === null) {
-      return "Tous";
-    }
-
-    if (
-      savedCuisine === "Tous" ||
-      savedCuisine === "Italienne" ||
-      savedCuisine === "Japonaise" ||
-      savedCuisine === "Burger" ||
-      savedCuisine === "Thaïe"
-    ) {
-      return savedCuisine;
-    }
-
-    return "Tous";
-  }
+  }, [selectedCuisine]);  
 
   //filteredRestaurant logic
   const filteredRestaurant = restaurants.filter((restaurant) => {
@@ -75,7 +56,7 @@ export function HomePage() {
 
   return (
     <main className="app-shell">
-      <HomePageHeader />
+      <Hero />
       <RestaurantFilter
         title="Restaurant filtrés"
         searchTerm={searchTerm}

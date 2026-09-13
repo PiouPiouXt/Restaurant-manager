@@ -1,6 +1,6 @@
 import './HomePage.css';
 
-export function HomePageHeader() {
+export function Hero() {
   return (
     <>
       <header className="site-header">
