@@ -27,6 +27,27 @@ export function HomePage() {
     localStorage.setItem("cuisineSaved", selectedCuisine);
   }, [selectedCuisine]);  
 
+
+  //Synchronisation restaurant
+  // useEffect(() => {
+  //   const interValid = setInterval(() => {
+  //     console.log("Synchronisation des restaurants...")
+  //   }, 5000)
+  //   return () => clearInterval(interValid);
+  // }, []);
+
+
+  //resize widow detector
+  useEffect(()=> {
+    const handleResize = () => {
+      console.log(`Fenêtre redimensionnée: ${window.innerWidth} x ${window.innerHeight}`)
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [])
+
   //filteredRestaurant logic
   const filteredRestaurant = restaurants.filter((restaurant) => {
     const matchesSearch = restaurant.name
