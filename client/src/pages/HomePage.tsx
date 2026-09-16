@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
@@ -14,6 +14,14 @@ export function HomePage() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
 
+  const renderCount = useRef(0);
+
+  useEffect(() => {
+    renderCount.current += 1;
+    console.log(`Nombre de renders : ${renderCount.current}`);
+  });
+
+
   function handleSelectedRestaurant(restaurant: Restaurant): void {
     setSelectedRestaurant(restaurant);
   }
@@ -25,10 +33,10 @@ export function HomePage() {
   //localStorage SelectedCuisine
   useEffect(() => {
     localStorage.setItem("cuisineSaved", selectedCuisine);
-  }, [selectedCuisine]);  
-
+  }, [selectedCuisine]);
 
   //Synchronisation restaurant
+
   // useEffect(() => {
   //   const interValid = setInterval(() => {
   //     console.log("Synchronisation des restaurants...")
@@ -37,8 +45,8 @@ export function HomePage() {
   // }, []);
 
 
-  //resize widow detector
-  useEffect(()=> {
+  //resize window detector
+  useEffect(() => {
     const handleResize = () => {
       console.log(`Fenêtre redimensionnée: ${window.innerWidth} x ${window.innerHeight}`)
     };
@@ -47,6 +55,16 @@ export function HomePage() {
       window.removeEventListener("resize", handleResize);
     };
   }, [])
+
+  useEffect(() => {
+    console.log(`abonnement creé pour ${selectedRestaurant?.name}`)
+    return () => {
+      console.log(`abonnement supprimé pour ${selectedRestaurant?.name} `)
+    }
+  }, [selectedRestaurant])
+
+  //useRef compteur component render
+
 
   //filteredRestaurant logic
   const filteredRestaurant = restaurants.filter((restaurant) => {
@@ -64,6 +82,7 @@ export function HomePage() {
     return matchesSearch && matchesCuisine && matchesOpen;
   });
 
+
   //title
   useEffect(() => {
     if (filteredRestaurant.length === 0) {
@@ -75,7 +94,10 @@ export function HomePage() {
     }
   }, [filteredRestaurant])
 
+
+
   return (
+
     <main className="app-shell">
       <Hero />
       <RestaurantFilter

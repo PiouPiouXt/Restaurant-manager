@@ -1,5 +1,6 @@
 import type { Restaurant, Cuisine } from "../types/restaurant";
 import './RestaurantFilter.css';
+// import { useRef } from "react";
 
 type RestaurantFilterProps = {
   onSelect: (restaurant: Restaurant) => void;
@@ -16,6 +17,7 @@ export function RestaurantFilter(
   { searchTerm, selectedCuisine, onlyOpen, ChangeSearch, handleCuisineChange, title, handleOpenChange }
     : RestaurantFilterProps) {
 
+  // const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <div>
@@ -27,7 +29,12 @@ export function RestaurantFilter(
           onChange={(event) => ChangeSearch(event.target.value)}
           placeholder="🔍 Rechercher un restaurant..."
           className="filter-btn"
+          // ref={searchInputRef}
         />
+
+        {/* <button onClick={() => searchInputRef.current?.focus()} className="filter-btn">
+          <span role="img" aria-label="search">🔍</span>
+        </button> */}
 
         {/* Cuisine Filter */}
         <p>Cuisine:</p>
