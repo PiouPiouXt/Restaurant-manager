@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
@@ -14,12 +14,18 @@ export function HomePage() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
 
-  const renderCount = useRef(0);
+  // const renderCount = useRef(0);
+  // useEffect(() => {
+  //   renderCount.current += 1;
+  //   console.log(`Nombre de renders : ${renderCount.current}`);
+  // });
 
+  const previousCuisine = useRef<Cuisine>("Tous");
   useEffect(() => {
-    renderCount.current += 1;
-    console.log(`Nombre de renders : ${renderCount.current}`);
-  });
+    console.log(`Ancienne cuisine: ${previousCuisine.current}`);
+    console.log(`Nouvelle cuisine: ${selectedCuisine}`);
+    previousCuisine.current = selectedCuisine;
+  }, [selectedCuisine]);
 
 
   function handleSelectedRestaurant(restaurant: Restaurant): void {
@@ -46,42 +52,42 @@ export function HomePage() {
 
 
   //resize window detector
-  useEffect(() => {
-    const handleResize = () => {
-      console.log(`Fenêtre redimensionnée: ${window.innerWidth} x ${window.innerHeight}`)
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [])
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     console.log(`Fenêtre redimensionnée: ${window.innerWidth} x ${window.innerHeight}`)
+  //   };
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, [])
 
-  useEffect(() => {
-    console.log(`abonnement creé pour ${selectedRestaurant?.name}`)
-    return () => {
-      console.log(`abonnement supprimé pour ${selectedRestaurant?.name} `)
-    }
-  }, [selectedRestaurant])
+  // useEffect(() => {
+  //   console.log(`abonnement creé pour ${selectedRestaurant?.name}`)
+  //   return () => {
+  //     console.log(`abonnement supprimé pour ${selectedRestaurant?.name} `)
+  //   }
+  // }, [selectedRestaurant])
 
   //useRef compteur component render
 
 
   //filteredRestaurant logic
-  const filteredRestaurant = restaurants.filter((restaurant) => {
-    const matchesSearch = restaurant.name
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+  const filteredRestaurant = useMemo(() => {
+    return restaurants.filter((restaurant) => {
+      const matchesSearch = restaurant.name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesCuisine =
+        selectedCuisine === "Tous" ||
+        restaurant.cuisine === selectedCuisine;
 
-    const matchesCuisine =
-      selectedCuisine === "Tous" ||
-      restaurant.cuisine === selectedCuisine;
+      const matchesOpen =
+        !onlyOpen || restaurant.isOpen;
 
-    const matchesOpen =
-      !onlyOpen || restaurant.isOpen;
-
-    return matchesSearch && matchesCuisine && matchesOpen;
-  });
-
+      return matchesSearch && matchesCuisine && matchesOpen;
+    });
+  }, [searchTerm, selectedCuisine, onlyOpen]);
 
   //title
   useEffect(() => {
