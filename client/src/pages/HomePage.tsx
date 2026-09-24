@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react'
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
@@ -14,12 +14,16 @@ export function HomePage() {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
 
+
+  //*RenderCount using useRef
   // const renderCount = useRef(0);
   // useEffect(() => {
   //   renderCount.current += 1;
   //   console.log(`Nombre de renders : ${renderCount.current}`);
   // });
 
+
+  //*useRef
   const previousCuisine = useRef<Cuisine>("Tous");
   useEffect(() => {
     console.log(`Ancienne cuisine: ${previousCuisine.current}`);
@@ -28,14 +32,14 @@ export function HomePage() {
   }, [selectedCuisine]);
 
 
-  function handleSelectedRestaurant(restaurant: Restaurant): void {
+  const handleSelectedRestaurant = useCallback((restaurant: Restaurant): void => {
     setSelectedRestaurant(restaurant);
-  }
+  }, []);
+  
 
-  function handleCuisineChange(cuisine: Cuisine): void {
+  const handleCuisineChange = useCallback((cuisine: Cuisine): void => {
     setSelectedCuisine(cuisine);
-  }
-
+  }, []);
   //localStorage SelectedCuisine
   useEffect(() => {
     localStorage.setItem("cuisineSaved", selectedCuisine);
@@ -100,8 +104,6 @@ export function HomePage() {
     }
   }, [filteredRestaurant])
 
-
-
   return (
 
     <main className="app-shell">
@@ -116,9 +118,10 @@ export function HomePage() {
         onSelect={handleSelectedRestaurant}
         handleOpenChange={setOnlyOpen}
       />
-      <RestaurantList restaurants={filteredRestaurant} onSelect={handleSelectedRestaurant} title="Où manger ce soir ?" />
+      <RestaurantList restaurants={filteredRestaurant} title="Où manger ce soir ?" />
+      {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}
       {selectedRestaurant &&
-        <div className="selected-restaurant">
+        <div>
           <h2>Restaurant sélectionné: {selectedRestaurant.name}</h2>
         </div>
       }

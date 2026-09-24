@@ -16,9 +16,6 @@ type RestaurantFilterProps = {
 export function RestaurantFilter(
   { searchTerm, selectedCuisine, onlyOpen, ChangeSearch, handleCuisineChange, title, handleOpenChange }
     : RestaurantFilterProps) {
-
-  // const searchInputRef = useRef<HTMLInputElement | null>(null);
-
   return (
     <div>
       {/* Search Term filter */}
@@ -29,7 +26,7 @@ export function RestaurantFilter(
           onChange={(event) => ChangeSearch(event.target.value)}
           placeholder="🔍 Rechercher un restaurant..."
           className="filter-btn"
-          // ref={searchInputRef}
+        // ref={searchInputRef}
         />
 
         {/* <button onClick={() => searchInputRef.current?.focus()} className="filter-btn">
