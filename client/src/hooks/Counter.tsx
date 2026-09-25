@@ -5,7 +5,8 @@ import { useReducer } from 'react';
 type Action =
   { type: 'increment' }
   | { type: 'decrement' }
-  | { type: 'reset' };
+  | { type: 'reset' }
+  | { type: 'set', value: number }
 
 
 function counterReducer(state: number, action: Action): number {
@@ -19,6 +20,9 @@ function counterReducer(state: number, action: Action): number {
     case "reset":
       return 0;
 
+    case "set":
+      return action.value;
+
     default:
       return state;
   }
@@ -28,7 +32,7 @@ export function Counter
   () {
   const [count, dispatch] = useReducer(counterReducer, 0);
   return (
-    <div>
+    <div className='flex justify-center gap-5 flex-columns'>
       <button onClick={() => {
         dispatch({ type: "increment" });
       }}>
@@ -44,8 +48,13 @@ export function Counter
       }}>
         reset
       </button >
+      <button onClick={() => {
+        dispatch({ type: "set", value: 15 })
+      }}>
+        value : 15
+      </button>
       <p> Your count is: {count} </p>
-    </div>
+    </div >
   );
 
 }
