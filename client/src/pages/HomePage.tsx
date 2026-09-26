@@ -1,19 +1,33 @@
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react'
+import { useEffect, useRef, useState, useMemo, useCallback, useReducer } from 'react'
+
+import { filterReducer, initialFilterState } from '../reducers/restaurantFilterReducer'
+
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
 import { Footer } from './Footer'
 import type { Cuisine, Restaurant } from '../types/restaurant'
-import { getSavedCuisine } from '../utils/getSavedCuisine'
+// import { getSavedCuisine } from '../utils/getSavedCuisine'
 import './HomePage.css'
 import { RestaurantFilter } from '../components/RestaurantFilter'
 
 export function HomePage() {
   const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
-  const [selectedCuisine, setSelectedCuisine] = useState<Cuisine>((getSavedCuisine));
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
 
+  // const [selectedCuisine, setSelectedCuisine] = useState<Cuisine>((getSavedCuisine));
+  // const [searchTerm, setSearchTerm] = useState<string>('');
+  // const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
+
+  const [filterState, dispatch] = useReducer(
+    filterReducer,
+    initialFilterState
+  );
+
+  const {
+    searchTerm,
+    selectedCuisine,
+    onlyOpen,
+  } = filterState;
 
   //*RenderCount using useRef
   // const renderCount = useRef(0);
@@ -35,11 +49,31 @@ export function HomePage() {
   const handleSelectedRestaurant = useCallback((restaurant: Restaurant): void => {
     setSelectedRestaurant(restaurant);
   }, []);
-  
+
 
   const handleCuisineChange = useCallback((cuisine: Cuisine): void => {
-    setSelectedCuisine(cuisine);
+    // setSelectedCuisine(cuisine);
+    dispatch({
+      type: "SET_CUISINE",
+      value: cuisine,
+    });
   }, []);
+
+  const handleOpenChange = useCallback((onlyOpen: boolean): void => {
+    dispatch({
+      type: "SET_ONLY_OPEN",
+      value: onlyOpen,
+    });
+  }, []);
+
+  function HandleSearchChange(searchTerm: string): void {
+    dispatch({
+      type: "SET_SEARCH",
+      value: searchTerm,
+    });
+  }
+
+
   //localStorage SelectedCuisine
   useEffect(() => {
     localStorage.setItem("cuisineSaved", selectedCuisine);
@@ -104,8 +138,8 @@ export function HomePage() {
     }
   }, [filteredRestaurant])
 
-  return (
 
+  return (
     <main className="app-shell">
       <Hero />
       <RestaurantFilter
@@ -113,10 +147,10 @@ export function HomePage() {
         searchTerm={searchTerm}
         selectedCuisine={selectedCuisine}
         onlyOpen={onlyOpen}
-        ChangeSearch={setSearchTerm}
+        ChangeSearch={HandleSearchChange}
         handleCuisineChange={handleCuisineChange}
         onSelect={handleSelectedRestaurant}
-        handleOpenChange={setOnlyOpen}
+        handleOpenChange={handleOpenChange}
       />
       <RestaurantList restaurants={filteredRestaurant} title="Où manger ce soir ?" />
       {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}

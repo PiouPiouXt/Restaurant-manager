@@ -26,7 +26,7 @@ export type FilterAction =
     value: boolean;
   };
 
-export function FilterReducer(
+export function filterReducer(
   state: FilterState,
   action: FilterAction
 ): FilterState {
