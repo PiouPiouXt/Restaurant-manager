@@ -50,8 +50,6 @@ export function filterReducer(
       }
     default:
       return state;
-
+      
   }
-
-
 }
