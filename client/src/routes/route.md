@@ -1,6 +1,6 @@
 // Default logic
 App
-└── HomePage
+└── RestaurantManager
     ├── RestaurantFilter
     ├── RestaurantList
     │   └── RestaurantCard
@@ -9,7 +9,7 @@ App
 //Custom hooks
 RestaurantProvider (src/provider/RestaurantProvider.tsx)
 │
-└── HomePage
+└── RestaurantManager
      │
      ├── RestaurantFilter
      │

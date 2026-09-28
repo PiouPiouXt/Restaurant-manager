@@ -2,7 +2,7 @@
 import type { Restaurant } from "../types/restaurant";
 import { RestaurantCard } from "./RestaurantCard";
 import { useRestaurantContext } from "../hooks/useRestaurantContext";
-import "../pages/HomePage.css";
+import "../pages/RestaurantManager.css";
 
 type RestaurantListProps = {
   restaurants: Restaurant[];

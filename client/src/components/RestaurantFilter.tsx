@@ -1,21 +1,26 @@
 import type { Restaurant, Cuisine } from "../types/restaurant";
+import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import './RestaurantFilter.css';
-// import { useRef } from "react";
 
 type RestaurantFilterProps = {
   onSelect: (restaurant: Restaurant) => void;
-  searchTerm: string;
-  ChangeSearch: (searchTerm: string) => void;
-  selectedCuisine: Cuisine;
-  handleCuisineChange: (cuisine: Cuisine) => void;
-  onlyOpen: boolean;
   title: string;
-  handleOpenChange: (onlyOpen: boolean) => void;
+  restaurants: Restaurant[];
 };
 
-export function RestaurantFilter(
-  { searchTerm, selectedCuisine, onlyOpen, ChangeSearch, handleCuisineChange, title, handleOpenChange }
-    : RestaurantFilterProps) {
+export function RestaurantFilter({ title }: RestaurantFilterProps) {
+
+  const {
+    filterState,
+    dispatch,
+  } = useRestaurantContext();
+
+  const {
+    searchTerm,
+    selectedCuisine,
+    onlyOpen,
+  } = filterState;
+
   return (
     <div>
       {/* Search Term filter */}
@@ -23,7 +28,14 @@ export function RestaurantFilter(
         <h1>{title}</h1>
         <input type="text"
           value={searchTerm}
-          onChange={(event) => ChangeSearch(event.target.value)}
+          onChange={
+            (event) => {
+              dispatch({
+                type: "SET_SEARCH",
+                value: event.target.value,
+              });
+            }
+          }
           placeholder="🔍 Rechercher un restaurant..."
           className="filter-btn"
         // ref={searchInputRef}
@@ -39,7 +51,12 @@ export function RestaurantFilter(
         <select value={selectedCuisine}
           onChange={
             //as Cuisine bcz we typed it cuisine instead of string
-            (event) => handleCuisineChange(event.target.value as Cuisine)
+            (event) => {
+              dispatch({
+                type: "SET_CUISINE",
+                value: event.target.value as Cuisine,
+              })
+            }
           }
           className="filter-btn">
           <option value="Tous">Toutes</option>
@@ -52,7 +69,13 @@ export function RestaurantFilter(
         {/* Open Only Filter */}
         <div>
           <input type="checkbox" name="onlyOpen" id="onlyOpen" className="filter-btn"
-            checked={onlyOpen} onChange={(event) => handleOpenChange(event.target.checked)} />
+            checked={onlyOpen} onChange={(event) => {
+              dispatch({
+                type: "SET_ONLY_OPEN",
+                value: event.target.checked,
+              });
+            }
+            } />
           <label htmlFor="onlyOpen">Ouvert uniquement</label>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import './HomePage.css';
+import './RestaurantManager.css';
 
 export function Footer() {
   return (

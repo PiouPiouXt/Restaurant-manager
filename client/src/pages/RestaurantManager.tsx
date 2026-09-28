@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState, useMemo, useCallback, useReducer } from 'react'
+import { useEffect, useRef, useMemo, useCallback } from 'react'
 
-import { filterReducer, initialFilterState } from '../reducers/restaurantFilterReducer'
+import { useRestaurantContext } from '../hooks/useRestaurantContext'
+
 
 import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
@@ -8,34 +9,21 @@ import { Hero } from './Hero'
 import { Footer } from './Footer'
 import type { Cuisine, Restaurant } from '../types/restaurant'
 // import { getSavedCuisine } from '../utils/getSavedCuisine'
-import './HomePage.css'
+import './RestaurantManager.css'
 import { RestaurantFilter } from '../components/RestaurantFilter'
 
-export function HomePage() {
-  const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
-
-  // const [selectedCuisine, setSelectedCuisine] = useState<Cuisine>((getSavedCuisine));
-  // const [searchTerm, setSearchTerm] = useState<string>('');
-  // const [onlyOpen, setOnlyOpen] = useState<boolean>(false);
-
-  const [filterState, dispatch] = useReducer(
-    filterReducer,
-    initialFilterState
-  );
+export function RestaurantManager() {
+  const {
+    selectedRestaurant,
+    setSelectedRestaurant,
+    filterState,
+  } = useRestaurantContext();
 
   const {
     searchTerm,
     selectedCuisine,
     onlyOpen,
   } = filterState;
-
-  //*RenderCount using useRef
-  // const renderCount = useRef(0);
-  // useEffect(() => {
-  //   renderCount.current += 1;
-  //   console.log(`Nombre de renders : ${renderCount.current}`);
-  // });
-
 
   //*useRef
   const previousCuisine = useRef<Cuisine>("Tous");
@@ -48,31 +36,7 @@ export function HomePage() {
 
   const handleSelectedRestaurant = useCallback((restaurant: Restaurant): void => {
     setSelectedRestaurant(restaurant);
-  }, []);
-
-
-  const handleCuisineChange = useCallback((cuisine: Cuisine): void => {
-    // setSelectedCuisine(cuisine);
-    dispatch({
-      type: "SET_CUISINE",
-      value: cuisine,
-    });
-  }, []);
-
-  const handleOpenChange = useCallback((onlyOpen: boolean): void => {
-    dispatch({
-      type: "SET_ONLY_OPEN",
-      value: onlyOpen,
-    });
-  }, []);
-
-  function HandleSearchChange(searchTerm: string): void {
-    dispatch({
-      type: "SET_SEARCH",
-      value: searchTerm,
-    });
-  }
-
+  }, [setSelectedRestaurant]);
 
   //localStorage SelectedCuisine
   useEffect(() => {
@@ -144,13 +108,8 @@ export function HomePage() {
       <Hero />
       <RestaurantFilter
         title="Restaurant filtrés"
-        searchTerm={searchTerm}
-        selectedCuisine={selectedCuisine}
-        onlyOpen={onlyOpen}
-        ChangeSearch={HandleSearchChange}
-        handleCuisineChange={handleCuisineChange}
+        restaurants={restaurants}
         onSelect={handleSelectedRestaurant}
-        handleOpenChange={handleOpenChange}
       />
       <RestaurantList restaurants={filteredRestaurant} title="Où manger ce soir ?" />
       {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}
