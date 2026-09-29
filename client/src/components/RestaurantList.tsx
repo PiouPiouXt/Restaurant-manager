@@ -5,6 +5,7 @@ import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import "../pages/RestaurantManager.css";
 
 type RestaurantListProps = {
+  onSelect: (restaurant: Restaurant) => void;
   restaurants: Restaurant[];
   title: string;
 };

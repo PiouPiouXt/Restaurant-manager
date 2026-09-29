@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo, useCallback } from 'react'
+import { useEffect, useRef, useMemo } from 'react'
 
 import { useRestaurantContext } from '../hooks/useRestaurantContext'
 
@@ -7,7 +7,7 @@ import { restaurants } from '../data/restaurant'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
 import { Footer } from './Footer'
-import type { Cuisine, Restaurant } from '../types/restaurant'
+import type { Cuisine } from '../types/restaurant'
 // import { getSavedCuisine } from '../utils/getSavedCuisine'
 import './RestaurantManager.css'
 import { RestaurantFilter } from '../components/RestaurantFilter'
@@ -32,11 +32,6 @@ export function RestaurantManager() {
     console.log(`Nouvelle cuisine: ${selectedCuisine}`);
     previousCuisine.current = selectedCuisine;
   }, [selectedCuisine]);
-
-
-  const handleSelectedRestaurant = useCallback((restaurant: Restaurant): void => {
-    setSelectedRestaurant(restaurant);
-  }, [setSelectedRestaurant]);
 
   //localStorage SelectedCuisine
   useEffect(() => {
@@ -109,9 +104,11 @@ export function RestaurantManager() {
       <RestaurantFilter
         title="Restaurant filtrés"
         restaurants={restaurants}
-        onSelect={handleSelectedRestaurant}
       />
-      <RestaurantList restaurants={filteredRestaurant} title="Où manger ce soir ?" />
+      <RestaurantList 
+      restaurants={filteredRestaurant} 
+      onSelect={setSelectedRestaurant}
+      title="Où manger ce soir ?" />
       {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}
       {selectedRestaurant &&
         <div>

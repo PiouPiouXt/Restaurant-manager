@@ -3,9 +3,9 @@ import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import './RestaurantFilter.css';
 
 type RestaurantFilterProps = {
-  onSelect: (restaurant: Restaurant) => void;
-  title: string;
+  
   restaurants: Restaurant[];
+  title: string;
 };
 
 export function RestaurantFilter({ title }: RestaurantFilterProps) {
@@ -13,6 +13,7 @@ export function RestaurantFilter({ title }: RestaurantFilterProps) {
   const {
     filterState,
     dispatch,
+    // setSelectedRestaurant,
   } = useRestaurantContext();
 
   const {
