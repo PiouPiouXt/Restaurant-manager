@@ -15,7 +15,6 @@ import { RestaurantFilter } from '../components/RestaurantFilter'
 export function RestaurantManager() {
   const {
     selectedRestaurant,
-    setSelectedRestaurant,
     filterState,
   } = useRestaurantContext();
 
@@ -105,10 +104,9 @@ export function RestaurantManager() {
         title="Restaurant filtrés"
         restaurants={restaurants}
       />
-      <RestaurantList 
-      restaurants={filteredRestaurant} 
-      onSelect={setSelectedRestaurant}
-      title="Où manger ce soir ?" />
+      <RestaurantList
+        restaurants={filteredRestaurant}
+        title="Où manger ce soir ?" />
       {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}
       {selectedRestaurant &&
         <div>

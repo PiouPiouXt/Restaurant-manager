@@ -1,16 +1,21 @@
 import type { Restaurant } from "../types/restaurant";
+import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import "./RestaurantCard.css";
 
 type RestaurantCardProps = {
   restaurant: Restaurant;
-  onSelect: (restaurant: Restaurant) => void;
 };
 
-export function RestaurantCard({ restaurant, onSelect }: RestaurantCardProps) {
+export function RestaurantCard({ restaurant }: RestaurantCardProps) {
+
+  const {
+    setSelectedRestaurant
+  } = useRestaurantContext();
+
   return (
-    <div 
+    <div
       className="restaurant-card"
-      onClick={() => onSelect(restaurant)}>
+      onClick={() => setSelectedRestaurant(restaurant)}>
       <div className="restaurant-image-wrap">
         <img className="restaurant-image" src={restaurant.image} alt={restaurant.name} />
         <span className={`status-badge ${restaurant.isOpen ? "status-open" : "status-closed"}`}>

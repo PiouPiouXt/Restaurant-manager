@@ -85,3 +85,18 @@ RestaurantFilter   RestaurantManager
                          │
                          ↓
                    RestaurantCard
+
+## Flux
+Utilisateur
+   ↓
+RestaurantFilter
+   ↓
+dispatch(action)
+   ↓
+filterReducer
+   ↓
+filterState
+   ↓
+filteredRestaurant
+   ↓
+RestaurantList

@@ -5,16 +5,14 @@ import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import "../pages/RestaurantManager.css";
 
 type RestaurantListProps = {
-  onSelect: (restaurant: Restaurant) => void;
   restaurants: Restaurant[];
   title: string;
 };
 
 export function RestaurantList({ restaurants, title }: RestaurantListProps) {
-  // export const RestaurantList = memo(({ restaurants, title, onSelect }: RestaurantListProps) => {
 
 
-  const { selectedRestaurant, setSelectedRestaurant } = useRestaurantContext();
+  const { selectedRestaurant } = useRestaurantContext();
 
   return (
     <section className="restaurant-section" id="restaurants">
@@ -26,15 +24,18 @@ export function RestaurantList({ restaurants, title }: RestaurantListProps) {
       </div>
       <div className="restaurant-grid">
         {restaurants.map((restaurant) =>
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} onSelect={setSelectedRestaurant} />
+          <RestaurantCard
+            key={restaurant.id}
+            restaurant={restaurant}
+          />
         )}
       </div>
 
       {selectedRestaurant && (
-      <p className="p-5 font-bold text-center">
-        Restaurant sélectionné : {selectedRestaurant.name}
-      </p>
-    )}
+        <p className="p-5 font-bold text-center">
+          Restaurant sélectionné : {selectedRestaurant.name}
+        </p>
+      )}
     </section>
   )
 };
