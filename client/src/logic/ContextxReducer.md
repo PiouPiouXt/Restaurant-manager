@@ -100,3 +100,25 @@ filterState
 filteredRestaurant
    ↓
 RestaurantList
+
+# FINAL RESULT
+             RestaurantProvider
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+   selectedRestaurant       filterState
+          │                     │
+          │                 dispatch
+          │                     │
+          └──────────┬──────────┘
+                     ↓
+             RestaurantContext
+                     │
+       ┌─────────────┼─────────────┐
+       ↓             ↓             ↓
+RestaurantFilter  RestaurantList  RestaurantCard
+       │             │             │
+       └─────────────┴─────────────┘
+                     │
+                     ↓
+             useRestaurantContext()

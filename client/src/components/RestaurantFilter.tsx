@@ -1,26 +1,31 @@
 import type { Restaurant, Cuisine } from "../types/restaurant";
-import { useRestaurantContext } from "../hooks/useRestaurantContext";
+import { useRestaurantFilters } from "../hooks/useRestaurantFilters";
 import './RestaurantFilter.css';
 
 type RestaurantFilterProps = {
-  
+
   restaurants: Restaurant[];
   title: string;
 };
 
 export function RestaurantFilter({ title }: RestaurantFilterProps) {
 
-  const {
-    filterState,
-    dispatch,
-    // setSelectedRestaurant,
-  } = useRestaurantContext();
 
   const {
     searchTerm,
     selectedCuisine,
     onlyOpen,
-  } = filterState;
+    setSearch,
+    setCuisine,
+    setOnlyOpen,
+  } = useRestaurantFilters();
+
+
+  // const {
+  //   searchTerm,
+  //   selectedCuisine,
+  //   onlyOpen,
+  // } = filterState;
 
   return (
     <div>
@@ -31,10 +36,7 @@ export function RestaurantFilter({ title }: RestaurantFilterProps) {
           value={searchTerm}
           onChange={
             (event) => {
-              dispatch({
-                type: "SET_SEARCH",
-                value: event.target.value,
-              });
+              setSearch(event.target.value)
             }
           }
           placeholder="🔍 Rechercher un restaurant..."
@@ -53,10 +55,7 @@ export function RestaurantFilter({ title }: RestaurantFilterProps) {
           onChange={
             //as Cuisine bcz we typed it cuisine instead of string
             (event) => {
-              dispatch({
-                type: "SET_CUISINE",
-                value: event.target.value as Cuisine,
-              })
+              setCuisine(event.target.value as Cuisine)
             }
           }
           className="filter-btn">
@@ -64,17 +63,14 @@ export function RestaurantFilter({ title }: RestaurantFilterProps) {
           <option value="Japonaise">Japonaise</option>
           <option value="Italienne">Italienne</option>
           <option value="Burger">Burger</option>
-          <option value="Thaïe">Thaïe</option>
+          <option value="Malagasy">Malagasy</option>
         </select>
 
         {/* Open Only Filter */}
         <div>
           <input type="checkbox" name="onlyOpen" id="onlyOpen" className="filter-btn"
             checked={onlyOpen} onChange={(event) => {
-              dispatch({
-                type: "SET_ONLY_OPEN",
-                value: event.target.checked,
-              });
+              setOnlyOpen(event.target.checked)
             }
             } />
           <label htmlFor="onlyOpen">Ouvert uniquement</label>

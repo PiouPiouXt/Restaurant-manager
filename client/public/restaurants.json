@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Extra Pizza",
+    "cuisine": "Italienne",
+    "rating": 4.2,
+    "isOpen": true,
+    "image": "/image/Pizza.avif"
+    
+  },
+  {
+    "id": 2,
+    "name": "Nakamura Sushi",
+    "cuisine": "Japonaise",
+    "rating": 4.1,
+    "isOpen": false,
+    "image": "/image/Sushi.avif"
+  },
+  {
+    "id": 3,
+    "name": "Pasta Mamamia",
+    "cuisine": "Italienne",
+    "rating": 4.8,
+    "isOpen": true
+
+  },
+  {
+    "id": 4,
+    "name": "Composé Master",
+    "cuisine": "Malagasy",
+    "rating": 4,
+    "isOpen": false
+  },
+  {
+    "id": 5,
+    "name": "Kinga Burger",
+    "cuisine": "Burger",
+    "rating": 4.5,
+    "isOpen": true,
+    "image": "/image/Burger.avif"
+  }
+]

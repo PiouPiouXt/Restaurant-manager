@@ -12,7 +12,7 @@ export function getSavedCuisine(): Cuisine {
       savedCuisine === "Italienne" ||
       savedCuisine === "Japonaise" ||
       savedCuisine === "Burger" ||
-      savedCuisine === "Thaïe"
+      savedCuisine === "Malagasy"
     ) {
       return savedCuisine;
     }

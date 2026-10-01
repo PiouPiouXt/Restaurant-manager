@@ -9,4 +9,4 @@ export type Restaurant = {
   image: string  
 }
 
-export type Cuisine = "Tous"|"Italienne"|"Japonaise"|"Burger"|"Thaïe";
+export type Cuisine = "Tous"|"Italienne"|"Japonaise"|"Burger"|"Malagasy";

@@ -1,18 +1,22 @@
 import { useEffect, useRef, useMemo } from 'react'
-
 import { useRestaurantContext } from '../hooks/useRestaurantContext'
-
-
-import { restaurants } from '../data/restaurant'
+import { useRestaurants } from '../hooks/useRestaurants'
 import { RestaurantList } from '../components/RestaurantList'
 import { Hero } from './Hero'
 import { Footer } from './Footer'
 import type { Cuisine } from '../types/restaurant'
-// import { getSavedCuisine } from '../utils/getSavedCuisine'
 import './RestaurantManager.css'
 import { RestaurantFilter } from '../components/RestaurantFilter'
 
 export function RestaurantManager() {
+
+  // Api Data Fetching restaurants.ts
+  const {
+    restaurants,
+    loading,
+    error,
+  } = useRestaurants();
+
   const {
     selectedRestaurant,
     filterState,
@@ -83,7 +87,7 @@ export function RestaurantManager() {
 
       return matchesSearch && matchesCuisine && matchesOpen;
     });
-  }, [searchTerm, selectedCuisine, onlyOpen]);
+  }, [restaurants, searchTerm, selectedCuisine, onlyOpen]);
 
   //title
   useEffect(() => {
@@ -96,6 +100,14 @@ export function RestaurantManager() {
     }
   }, [filteredRestaurant])
 
+
+  if (loading) {
+    return <p>Chargement des restaurants...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <main className="app-shell">
