@@ -21,7 +21,8 @@
     "name": "Pasta Mamamia",
     "cuisine": "Italienne",
     "rating": 4.8,
-    "isOpen": true
+    "isOpen": true,
+    "image": "/image/Pasta.avif"
 
   },
   {
@@ -29,7 +30,8 @@
     "name": "Composé Master",
     "cuisine": "Malagasy",
     "rating": 4,
-    "isOpen": false
+    "isOpen": false,
+    "image": "/image/Pasta.avif"
   },
   {
     "id": 5,

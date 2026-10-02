@@ -1,4 +1,5 @@
 import type { Restaurant } from "../types/restaurant";
+import { Link } from "react-router-dom";
 import { useRestaurantContext } from "../hooks/useRestaurantContext";
 import "./RestaurantCard.css";
 
@@ -15,7 +16,8 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
   return (
     <div
       className="restaurant-card"
-      onClick={() => setSelectedRestaurant(restaurant)}>
+      onClick={() => setSelectedRestaurant(restaurant)}
+    >
       <div className="restaurant-image-wrap">
         <img className="restaurant-image" src={restaurant.image} alt={restaurant.name} />
         <span className={`status-badge ${restaurant.isOpen ? "status-open" : "status-closed"}`}>
@@ -38,6 +40,11 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           <span>{"€".repeat(restaurant.priceRange)}</span>
         </div>
       </div>
+      <Link to={`/restaurants/${restaurant.id}`}>
+        <span className="flex items-center justify-center bg-primary px-4 py-2 rounded-md mt-4 inline-block">
+          [Voir le restaurant]
+        </span>
+      </Link>
     </div>
   )
 }

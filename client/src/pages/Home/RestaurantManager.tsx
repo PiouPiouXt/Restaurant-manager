@@ -1,12 +1,12 @@
 import { useEffect, useRef, useMemo } from 'react'
-import { useRestaurantContext } from '../hooks/useRestaurantContext'
-import { useRestaurants } from '../hooks/useRestaurants'
-import { RestaurantList } from '../components/RestaurantList'
+import { useRestaurantContext } from '../../hooks/useRestaurantContext'
+import { useRestaurants } from '../../hooks/useRestaurants'
+import { RestaurantList } from '../../components/RestaurantList'
 import { Hero } from './Hero'
 import { Footer } from './Footer'
-import type { Cuisine } from '../types/restaurant'
+import type { Cuisine } from '../../types/restaurant'
 import './RestaurantManager.css'
-import { RestaurantFilter } from '../components/RestaurantFilter'
+import { RestaurantFilter } from '../../components/RestaurantFilter'
 
 export function RestaurantManager() {
 
