@@ -22,15 +22,13 @@ export function RestaurantCard({ restaurant }: RestaurantCardProps) {
           alt={restaurant.name}
         />
         <span
-          className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 py-1.5 px-2.5 text-paper font-bold text-[10px] tracking-[.05em] uppercase rounded-md ${
-            restaurant.isOpen ? "bg-ink-glass" : "bg-ink-glass-light"
-          }`}
+          className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 py-1.5 px-2.5 text-paper font-bold text-[10px] tracking-[.05em] uppercase rounded-md ${restaurant.isOpen ? "bg-ink-glass" : "bg-ink-glass-light"
+            }`}
         >
           <span
             aria-hidden="true"
-            className={`w-1.5 h-1.5 rounded-full ${
-              restaurant.isOpen ? "bg-green-dot" : "bg-red-dot"
-            }`}
+            className={`w-1.5 h-1.5 rounded-full ${restaurant.isOpen ? "bg-green-dot" : "bg-red-dot"
+              }`}
           />
           {restaurant.isOpen ? "Ouvert" : "Fermé"}
         </span>
