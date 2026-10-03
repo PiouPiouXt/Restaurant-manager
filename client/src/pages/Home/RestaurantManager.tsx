@@ -5,7 +5,6 @@ import { RestaurantList } from '../../components/RestaurantList'
 import { Hero } from './Hero'
 import { Footer } from '../../components/Footer'
 import type { Cuisine } from '../../types/restaurant'
-import './RestaurantManager.css'
 import { RestaurantFilter } from '../../components/RestaurantFilter'
 
 export function RestaurantManager() {
@@ -41,37 +40,6 @@ export function RestaurantManager() {
     localStorage.setItem("cuisineSaved", selectedCuisine);
   }, [selectedCuisine]);
 
-  //Synchronisation restaurant
-
-  // useEffect(() => {
-  //   const interValid = setInterval(() => {
-  //     console.log("Synchronisation des restaurants...")
-  //   }, 5000)
-  //   return () => clearInterval(interValid);
-  // }, []);
-
-
-  //resize window detector
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     console.log(`Fenêtre redimensionnée: ${window.innerWidth} x ${window.innerHeight}`)
-  //   };
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log(`abonnement creé pour ${selectedRestaurant?.name}`)
-  //   return () => {
-  //     console.log(`abonnement supprimé pour ${selectedRestaurant?.name} `)
-  //   }
-  // }, [selectedRestaurant])
-
-  //useRef compteur component render
-
-
   //filteredRestaurant logic
   const filteredRestaurant = useMemo(() => {
     return restaurants.filter((restaurant) => {
@@ -102,15 +70,25 @@ export function RestaurantManager() {
 
 
   if (loading) {
-    return <p>Chargement des restaurants...</p>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-paper text-ink">
+        <div className="w-10 h-10 border-3 border-line border-t-coral rounded-full animate-spin mb-4" />
+        <p className="text-muted text-sm tracking-[.08em] uppercase">Chargement des restaurants…</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-paper text-ink">
+        <span className="text-coral text-4xl mb-3">⚠</span>
+        <p className="text-muted text-sm">{error}</p>
+      </div>
+    );
   }
 
   return (
-    <main className="app-shell">
+    <main className="max-w-7xl mx-auto px-12 max-md:px-5">
       <Hero />
       <RestaurantFilter
         title="Restaurant filtrés"
@@ -119,14 +97,14 @@ export function RestaurantManager() {
       <RestaurantList
         restaurants={filteredRestaurant}
         title="Où manger ce soir ?" />
-      {/* *don't work, we already use Custom Hook useRestaurantContext in RestaurantList.tsx */}
       {selectedRestaurant &&
-        <div>
-          <h2>Restaurant sélectionné: {selectedRestaurant.name}</h2>
+        <div className="text-center py-4">
+          <h2 className="text-ink font-heading text-2xl font-normal">
+            Restaurant sélectionné: {selectedRestaurant.name}
+          </h2>
         </div>
       }
       <Footer />
     </main>
   )
 }
-

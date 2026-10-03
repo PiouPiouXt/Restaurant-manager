@@ -1,17 +1,29 @@
 @import "tailwindcss";
 
+@theme {
+  --color-paper: #f6f2e9;
+  --color-ink: #20231f;
+  --color-muted: #797a70;
+  --color-line: #d9d4c8;
+  --color-coral: #d6533d;
+  --color-sage: #dbe1d2;
+  --color-sage-glass: rgba(219, 225, 210, 0.42);
+  --color-ink-glass: rgba(32, 35, 31, 0.82);
+  --color-ink-glass-light: rgba(32, 35, 31, 0.72);
+  --color-coral-ring: rgba(214, 83, 61, 0.12);
+  --color-coral-outline: rgba(214, 83, 61, 0.2);
+  --color-warm-white: #fffdf8;
+  --color-green-dot: #8fca69;
+  --color-red-dot: #d6a39c;
+
+  --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-heading: Georgia, "Times New Roman", serif;
+}
+
 :root {
-  --paper: #f6f2e9;
-  --ink: #20231f;
-  --muted: #797a70;
-  --line: #d9d4c8;
-  --coral: #d6533d;
-  --sage: #dbe1d2;
-  --sans: "Trebuchet MS", "Segoe UI", sans-serif;
-  --heading: Georgia, "Times New Roman", serif;
-  font-family: var(--sans);
-  color: var(--ink);
-  background: var(--paper);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,14 +40,56 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: var(--paper);
+  background: var(--color-paper);
 }
 
 button,
 a {
-  transition: color .2s ease, opacity .2s ease, transform .2s ease;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 a:hover {
-  opacity: .65;
+  opacity: 0.65;
+}
+
+/* ── Toggle switch (custom, cannot be fully Tailwind) ── */
+.toggle-switch {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  appearance: none;
+  background: var(--color-paper);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.toggle-switch::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-muted);
+  content: "";
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.toggle-switch:checked {
+  border-color: var(--color-coral);
+  background: var(--color-coral);
+}
+
+.toggle-switch:checked::after {
+  background: var(--color-paper);
+  transform: translateX(16px);
+}
+
+.toggle-switch:focus-visible {
+  outline: 3px solid var(--color-coral-outline);
+  outline-offset: 2px;
 }
