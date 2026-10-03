@@ -1,5 +1,5 @@
 import { HomePage } from './pages/HomePage';
-import { RestaurantProvider } from './provider/RestaurantProvider';
+import { RestaurantProvider } from './context/RestaurantProvider';
 
 export function App() {
 

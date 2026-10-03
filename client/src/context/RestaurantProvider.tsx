@@ -1,6 +1,6 @@
 // 3- Provider
 import React, { useState, useReducer } from "react";
-import { RestaurantContext } from "../context/RestaurantContext";
+import { RestaurantContext } from "./RestaurantContext";
 import type { Restaurant } from "../types/restaurant";
 import { filterReducer, initialFilterState } from "../reducers/restaurantFilterReducer";
 

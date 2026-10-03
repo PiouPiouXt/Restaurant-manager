@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Restaurant } from "../types/restaurant";
+import { getRestaurants } from "../services/restaurantApi";
 
 export function useRestaurants() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -15,7 +16,7 @@ export function useRestaurants() {
           throw new Error("Impossible de charger les restaurants");
         }
 
-        const data: Restaurant[] = await response.json();
+        const data = await getRestaurants();
 
         setRestaurants(data);
       } catch {
